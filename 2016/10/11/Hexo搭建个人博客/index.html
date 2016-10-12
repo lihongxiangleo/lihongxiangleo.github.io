@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/10/11/Hexo搭建个人博客/index.html">
 <meta property="og:site_name" content="Leo's Blog">
 <meta property="og:description" content="选择Hexo搭建个人博客来沪工作后所接手的项目一直在叠加需求，工作比较忙碌再加之自己的惰性，很久都没写博客来总结一下开发中遇到的坑和知识，之前曾在csdn上写博客，博客地址：http://blog.csdn.net/lihongxiangleo?viewmode=contents但是由于csdn糟糕的体验和操蛋的服务器让我完全不能忍受，所以决定来搭建自己的个人博客了。如题我选择了Hexo这个博客框">
-<meta property="og:updated_time" content="2016-10-11T05:36:07.000Z">
+<meta property="og:updated_time" content="2016-10-12T02:11:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Hexo搭建个人博客">
 <meta name="twitter:description" content="选择Hexo搭建个人博客来沪工作后所接手的项目一直在叠加需求，工作比较忙碌再加之自己的惰性，很久都没写博客来总结一下开发中遇到的坑和知识，之前曾在csdn上写博客，博客地址：http://blog.csdn.net/lihongxiangleo?viewmode=contents但是由于csdn糟糕的体验和操蛋的服务器让我完全不能忍受，所以决定来搭建自己的个人博客了。如题我选择了Hexo这个博客框">
@@ -336,18 +336,20 @@
       
         <h2 id="选择Hexo搭建个人博客"><a href="#选择Hexo搭建个人博客" class="headerlink" title="选择Hexo搭建个人博客"></a>选择Hexo搭建个人博客</h2><p>来沪工作后所接手的项目一直在叠加需求，工作比较忙碌再加之自己的惰性，很久都没写博客来总结一下开发中遇到的坑和知识，之前曾在csdn上写博客，博客地址：<br><a href="http://blog.csdn.net/lihongxiangleo?viewmode=contents" target="_blank" rel="external">http://blog.csdn.net/lihongxiangleo?viewmode=contents</a>但是由于csdn糟糕的体验和操蛋的服务器让我完全不能忍受，所以决定来搭建自己的个人博客了。如题我选择了Hexo这个博客框架，Hexo是一个快速、简洁且高效的博客框架，只需一条指令即可部署到 GitHubPages，Heroku 或其他网站，具体如何搭建和更换主题可以参照Hexo的官方文档，这里我选择的是简洁优雅的NexT主题。</p>
 <ul>
-<li>Hexo官方文档：<a href="https://hexo.io/zh-cn/" target="_blank" rel="external">https://hexo.io/zh-cn/</a></li>
-<li>Next主题配置使用文档：<a href="http://theme-next.iissnan.com/" target="_blank" rel="external">http://theme-next.iissnan.com/</a><br>在这里，要感谢Hexo和Next的作者！<a id="more"></a>
-</li>
+<li><a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo官方文档</a></li>
+<li><a href="http://theme-next.iissnan.com/" target="_blank" rel="external">Next主题配置使用文</a><br>在这里，要感谢Hexo和Next的作者！</li>
 </ul>
-<h2 id="Hexo常用命令"><a href="#Hexo常用命令" class="headerlink" title="Hexo常用命令"></a>Hexo常用命令</h2><p>Hexo的命令非常的简洁，具体的命令在官方文档上都有,大家可以自行去学习：<a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="external">https://hexo.io/zh-cn/docs/commands.html</a>常用的命令大概就下面几条：</p>
+<h2 id="Hexo常用命令"><a href="#Hexo常用命令" class="headerlink" title="Hexo常用命令"></a>Hexo常用命令</h2><p>Hexo的命令非常的简洁，具体的命令在官方文档上都有,大家可以自行去学习：<a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="external">Hexo命令</a></p>
+<p>常用的命令大概就下面几条：</p>
 <ul>
 <li>hexo new title生成一篇名为“title”的新文章，采用默认的模板</li>
 <li>hexo g 重新渲染Blog</li>
 <li>hexo s –debug启动本地服务器，可以用来本地测试</li>
 <li>hexo d 将本地public目录下的文件内容提交到Github，具体的项目地址在_config.yml设置</li>
-<li>hexo clean 清空本地的缓存文件db.json和已生成的静态文件public<br>在本地测试的时候有可能会遇到端口被占用的问题，我目前的处理方式是关掉网页然后重启Terminal就解决了。一般的写作流程差不多是着这样的：<br>hexo new出一篇新的文章，写作完成后使用hexo g渲染，本地测试通过后使用hexo d部署到github page，完成文章的发布。</li>
+<li>hexo clean 清空本地的缓存文件db.json和已生成的静态文件public<a id="more"></a>
+</li>
 </ul>
+<p>在本地测试的时候有可能会遇到端口被占用的问题，我目前的处理方式是关掉网页然后重启Terminal就解决了。一般的写作流程差不多是着这样的：<br>hexo new出一篇新的文章，写作完成后使用hexo g渲染，本地测试通过后使用hexo d部署到github page，完成文章的发布。</p>
 <h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>倒腾了一天半，终于把博客的基本功能搭建好了，可以正常发表文章，目前还没有集成评论功能和统计功能，之后再慢慢给弄上去。希望自己能够克服自己的惰性坚持写博客（毕竟我花了这么长的时间来搭建！！！），多积累多学习，我们开始吧骚年！</p>
 
       
@@ -376,6 +378,20 @@
         </div>
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/12/三星手机拍照图片自动旋解决方法/" rel="prev" title="三星手机拍照图片自动旋解决方法">
+                三星手机拍照图片自动旋解决方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -435,12 +451,12 @@
                src="/uploads/avatar.png"
                alt="lihongxiangleo" />
           <p class="site-author-name" itemprop="name">lihongxiangleo</p>
-          <p class="site-description motion-element" itemprop="description">Keep On Dancing</p>
+          <p class="site-description motion-element" itemprop="description">AndroidDevelop Pooper</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -448,7 +464,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -457,7 +473,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
