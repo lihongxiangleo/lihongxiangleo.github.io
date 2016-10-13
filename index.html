@@ -347,7 +347,6 @@
       
         
           <h2 id="什么是Gradle"><a href="#什么是Gradle" class="headerlink" title="什么是Gradle"></a>什么是Gradle</h2><p>现在大部分的Android开发者所用的 IDE 应该都是 AndroidStudio 了，我们知道 AS 中的项目是基于 Gradle 构建的。Gradle 是一种基于 Groovy 语言的构建工具，Groovy 语法跟 Java 语法很相像，是一种动态语言，而且在 Java 基础上做了不少改进，用起来更加简洁、灵活。</p>
-<h2 id="Gradle-Wrapper"><a href="#Gradle-Wrapper" class="headerlink" title="Gradle Wrapper"></a>Gradle Wrapper</h2><p>现在默认新建一个项目，然后点击 AS 上运行，默认就会直接帮你安装 Gradle ，我们不需要额外的安装 Gradle 了，但是其实这个 Gradle 不是真正的 Gradle ，他叫 Gradle Wrapper ，意为 Gradle 的包装，什么意思呢？假设我们本地有多个项目，一个是比较老的项目，还用着 Gradle 1.0 的版本，一个是比较新的项目用了 Gradle 2.0 的版本，但是你两个项目肯定都想要同时运行的，如果你只装了 Gradle 1.0 的话那肯定不行，所以为了解决这个问题，Google 推出了 Gradle Wrapper 的概念，就是他在你每个项目都配置了一个指定版本的 Gradle ，你可以理解为每个 Android 项目本地都有一个小型的 Gradle ，通过这个每个项目你可以支持用不同的 Gradle 版本来构建项目。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/10/13/Gradle基础及常用命令/#more" rel="contents">
               阅读全文 &raquo;
@@ -469,16 +468,16 @@
 
       
         
-          
-            <p>最近项目中遇到一个手机拍照的问题，就是三星、索尼等厂家的手机拍摄的照片呈现在ImageView上的时候图片会自动的旋转，由于项目中有发帖功能，这样用户在上传图片的时图片的角度就不正确了。在搜索了一些资料之后，找到了解决办法，思路很简单：</p>
+          <p>最近项目中遇到一个手机拍照的问题，就是三星、索尼等厂家的手机拍摄的照片呈现在ImageView上的时候图片会自动的旋转，由于项目中有发帖功能，这样用户在上传图片的时图片的角度就不正确了。在搜索了一些资料之后，找到了解决办法，思路很简单：</p>
 <ol>
 <li>获取图片旋转的角度</li>
 <li>在显示图片时使图片旋转回正确的角度</li>
 </ol>
-<p>我们来看一下实现代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  * 读取图片的旋转的角度</div><div class="line">  * <span class="doctag">@param</span> path 图片绝对路径</div><div class="line">  * <span class="doctag">@return</span> 图片的旋转角度</div><div class="line">  */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getBitmapDegree</span><span class="params">(String path)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> degree = <span class="number">0</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">// 从指定路径下读取图片，并获取其EXIF信息</span></div><div class="line">            ExifInterface exifInterface = <span class="keyword">new</span> ExifInterface(path);</div><div class="line">            <span class="comment">// 获取图片的旋转信息</span></div><div class="line">            <span class="keyword">int</span> orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,</div><div class="line">                    ExifInterface.ORIENTATION_NORMAL);</div><div class="line">            <span class="keyword">switch</span> (orientation) &#123;</div><div class="line">                <span class="keyword">case</span> ExifInterface.ORIENTATION_ROTATE_90:</div><div class="line">                    degree = <span class="number">90</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> ExifInterface.ORIENTATION_ROTATE_180:</div><div class="line">                    degree = <span class="number">180</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> ExifInterface.ORIENTATION_ROTATE_270:</div><div class="line">                    degree = <span class="number">270</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> degree;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>代码很容易理解，注释写很清楚，在设置显示图片时根据获取的旋转角度将图片旋转回去即可，这样问题就解决了，enjoy 😁</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/12/三星手机拍照图片自动旋解决方法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -595,19 +594,7 @@
 
       
         
-          <h2 id="选择Hexo搭建个人博客"><a href="#选择Hexo搭建个人博客" class="headerlink" title="选择Hexo搭建个人博客"></a>选择Hexo搭建个人博客</h2><p>来沪工作后所接手的项目一直在叠加需求，工作比较忙碌再加之自己的惰性，很久都没写博客来总结一下开发中遇到的坑和知识，之前曾在csdn上写博客：<a href="http://blog.csdn.net/lihongxiangleo?viewmode=contents">博客地址</a>。但是由于csdn糟糕的体验和操蛋的服务器让我完全不能忍受，所以决定来搭建自己的个人博客了。如题我选择了Hexo这个博客框架，Hexo是一个快速、简洁且高效的博客框架，只需一条指令即可部署到 GitHubPages，Heroku 或其他网站，具体如何搭建和更换主题可以参照Hexo的官方文档，这里我选择的是简洁优雅的NexT主题。</p>
-<ul>
-<li><a href="https://hexo.io/zh-cn/">Hexo官方文档</a></li>
-<li><a href="http://theme-next.iissnan.com/">Next主题配置使用文</a><br>在这里，要感谢Hexo和Next的作者！</li>
-</ul>
-<h2 id="Hexo常用命令"><a href="#Hexo常用命令" class="headerlink" title="Hexo常用命令"></a>Hexo常用命令</h2><p>Hexo的命令非常的简洁，具体的命令在官方文档上都有,大家可以自行去学习：<a href="https://hexo.io/zh-cn/docs/commands.html">Hexo命令</a></p>
-<p>常用的命令大概就下面几条：</p>
-<ul>
-<li>hexo new title生成一篇名为“title”的新文章，采用默认的模板</li>
-<li>hexo g 重新渲染Blog</li>
-<li>hexo s –debug启动本地服务器，可以用来本地测试</li>
-<li>hexo d 将本地public目录下的文件内容提交到Github，具体的项目地址在_config.yml设置</li>
-<li>hexo clean 清空本地的缓存文件db.json和已生成的静态文件public
+          <h2 id="选择Hexo搭建个人博客"><a href="#选择Hexo搭建个人博客" class="headerlink" title="选择Hexo搭建个人博客"></a>选择Hexo搭建个人博客</h2><p>来沪工作后所接手的项目一直在叠加需求，工作比较忙碌再加之自己的惰性，很久都没写博客来总结一下开发中遇到的坑和知识，之前曾在csdn上写博客：<a href="http://blog.csdn.net/lihongxiangleo?viewmode=contents">博客地址</a>。但是由于csdn糟糕的体验和操蛋的服务器让我完全不能忍受，所以决定来搭建自己的个人博客了。如题我选择了Hexo这个博客框架，Hexo是一个快速、简洁且高效的博客框架，只需一条指令即可部署到 GitHubPages，Heroku 或其他网站，具体如何搭建和更换主题可以参照Hexo的官方文档，这里我选择的是简洁优雅的NexT主题。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/10/11/Hexo搭建个人博客/#more" rel="contents">
               阅读全文 &raquo;
