@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo," />
+  <meta name="keywords" content="Android,Piccasso," />
 
 
 
@@ -102,16 +102,16 @@
 
 
 
-<meta name="description" content="选择Hexo搭建个人博客来沪工作后所接手的项目一直在叠加需求，工作比较忙碌再加之自己的惰性，很久都没写博客来总结一下开发中遇到的坑和知识，之前曾在csdn上写博客：博客地址。但是由于csdn糟糕的体验和操蛋的服务器让我完全不能忍受，所以决定来搭建自己的个人博客了。如题我选择了Hexo这个博客框架，Hexo是一个快速、简洁且高效的博客框架，只需一条指令即可部署到 GitHubPages，Heroku">
+<meta name="description" content="在开发中我们会经常遇到对图片进行圆角处理，以及现在流行的头像等将图片处理成圆形，Piccasso提供了transform这个机制，我们可以利用这个机制，在图片展示之前对图片进行处理，处理方式只需要实现Transformation 接口即可，下面我们来看一下实现代码。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Hexo搭建个人博客">
-<meta property="og:url" content="http://yoursite.com/2016/10/11/Hexo搭建个人博客/index.html">
+<meta property="og:title" content="Piccasso图片圆角及圆形图片实现">
+<meta property="og:url" content="http://yoursite.com/2016/10/18/Piccasso圆形图片及圆角图片处理/index.html">
 <meta property="og:site_name" content="Leo's Blog">
-<meta property="og:description" content="选择Hexo搭建个人博客来沪工作后所接手的项目一直在叠加需求，工作比较忙碌再加之自己的惰性，很久都没写博客来总结一下开发中遇到的坑和知识，之前曾在csdn上写博客：博客地址。但是由于csdn糟糕的体验和操蛋的服务器让我完全不能忍受，所以决定来搭建自己的个人博客了。如题我选择了Hexo这个博客框架，Hexo是一个快速、简洁且高效的博客框架，只需一条指令即可部署到 GitHubPages，Heroku">
-<meta property="og:updated_time" content="2016-10-13T06:18:08.000Z">
+<meta property="og:description" content="在开发中我们会经常遇到对图片进行圆角处理，以及现在流行的头像等将图片处理成圆形，Piccasso提供了transform这个机制，我们可以利用这个机制，在图片展示之前对图片进行处理，处理方式只需要实现Transformation 接口即可，下面我们来看一下实现代码。">
+<meta property="og:updated_time" content="2016-10-18T12:41:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Hexo搭建个人博客">
-<meta name="twitter:description" content="选择Hexo搭建个人博客来沪工作后所接手的项目一直在叠加需求，工作比较忙碌再加之自己的惰性，很久都没写博客来总结一下开发中遇到的坑和知识，之前曾在csdn上写博客：博客地址。但是由于csdn糟糕的体验和操蛋的服务器让我完全不能忍受，所以决定来搭建自己的个人博客了。如题我选择了Hexo这个博客框架，Hexo是一个快速、简洁且高效的博客框架，只需一条指令即可部署到 GitHubPages，Heroku">
+<meta name="twitter:title" content="Piccasso图片圆角及圆形图片实现">
+<meta name="twitter:description" content="在开发中我们会经常遇到对图片进行圆角处理，以及现在流行的头像等将图片处理成圆形，Piccasso提供了transform这个机制，我们可以利用这个机制，在图片展示之前对图片进行处理，处理方式只需要实现Transformation 接口即可，下面我们来看一下实现代码。">
 
 
 
@@ -132,10 +132,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/10/11/Hexo搭建个人博客/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/10/18/Piccasso圆形图片及圆角图片处理/"/>
 
 
-  <title> 使用Hexo搭建个人博客 | Leo's Blog </title>
+  <title> Piccasso图片圆角及圆形图片实现 | Leo's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="en">
@@ -275,7 +275,7 @@
             
             
               
-                使用Hexo搭建个人博客
+                Piccasso图片圆角及圆形图片实现
               
             
           </h1>
@@ -287,8 +287,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-11T11:07:27+08:00" content="2016-10-11">
-              2016-10-11
+            <time itemprop="dateCreated" datetime="2016-10-18T20:24:52+08:00" content="2016-10-18">
+              2016-10-18
             </time>
           </span>
 
@@ -301,8 +301,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
 
@@ -317,8 +317,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/11/Hexo搭建个人博客/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/11/Hexo搭建个人博客/" itemprop="commentsCount"></span>
+                <a href="/2016/10/18/Piccasso圆形图片及圆角图片处理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/18/Piccasso圆形图片及圆角图片处理/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -341,22 +341,9 @@
       
 
       
-        <h2 id="选择Hexo搭建个人博客"><a href="#选择Hexo搭建个人博客" class="headerlink" title="选择Hexo搭建个人博客"></a>选择Hexo搭建个人博客</h2><p>来沪工作后所接手的项目一直在叠加需求，工作比较忙碌再加之自己的惰性，很久都没写博客来总结一下开发中遇到的坑和知识，之前曾在csdn上写博客：<a href="http://blog.csdn.net/lihongxiangleo?viewmode=contents" target="_blank" rel="external">博客地址</a>。但是由于csdn糟糕的体验和操蛋的服务器让我完全不能忍受，所以决定来搭建自己的个人博客了。如题我选择了Hexo这个博客框架，Hexo是一个快速、简洁且高效的博客框架，只需一条指令即可部署到 GitHubPages，Heroku 或其他网站，具体如何搭建和更换主题可以参照Hexo的官方文档，这里我选择的是简洁优雅的NexT主题。<br> <a id="more"></a></p>
-<ul>
-<li><a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo官方文档</a></li>
-<li><a href="http://theme-next.iissnan.com/" target="_blank" rel="external">Next主题配置使用文</a><br>在这里，要感谢Hexo和Next的作者！</li>
-</ul>
-<h2 id="Hexo常用命令"><a href="#Hexo常用命令" class="headerlink" title="Hexo常用命令"></a>Hexo常用命令</h2><p>Hexo的命令非常的简洁，具体的命令在官方文档上都有,大家可以自行去学习：<a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="external">Hexo命令</a></p>
-<p>常用的命令大概就下面几条：</p>
-<ul>
-<li>hexo new title生成一篇名为“title”的新文章，采用默认的模板</li>
-<li>hexo g 重新渲染Blog</li>
-<li>hexo s –debug启动本地服务器，可以用来本地测试</li>
-<li>hexo d 将本地public目录下的文件内容提交到Github，具体的项目地址在_config.yml设置</li>
-<li>hexo clean 清空本地的缓存文件db.json和已生成的静态文件public</li>
-</ul>
-<p>在本地测试的时候有可能会遇到端口被占用的问题，我目前的处理方式是关掉网页然后重启Terminal就解决了。一般的写作流程差不多是着这样的：<br>hexo new出一篇新的文章，写作完成后使用hexo g渲染，本地测试通过后使用hexo d部署到github page，完成文章的发布。</p>
-<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>倒腾了一天半，终于把博客的基本功能搭建好了，可以正常发表文章，目前还没有集成评论功能和统计功能，之后再慢慢给弄上去。希望自己能够克服自己的惰性坚持写博客（毕竟我花了这么长的时间来搭建！！！），多积累多学习，我们开始吧骚年！</p>
+        <p>在开发中我们会经常遇到对图片进行圆角处理，以及现在流行的头像等将图片处理成圆形，Piccasso提供了transform这个机制，我们可以利用这个机制，在图片展示之前对图片进行处理，处理方式只需要实现<br>Transformation 接口即可，下面我们来看一下实现代码。<br><a id="more"></a></p>
+<h2 id="图片圆角"><a href="#图片圆角" class="headerlink" title="图片圆角"></a>图片圆角</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RoundedTransform</span> <span class="keyword">implements</span> <span class="title">Transformation</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> radius;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> margin;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RoundedTransform</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> radius, <span class="keyword">final</span> <span class="keyword">int</span> margin)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.radius = radius;</div><div class="line">        <span class="keyword">this</span>.margin = margin;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Bitmap <span class="title">transform</span><span class="params">(Bitmap source)</span> </span>&#123;</div><div class="line">        <span class="keyword">final</span> Paint paint = <span class="keyword">new</span> Paint();</div><div class="line">        paint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line">        paint.setShader(<span class="keyword">new</span> BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));</div><div class="line">        Bitmap output = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);</div><div class="line">        Canvas canvas = <span class="keyword">new</span> Canvas(output);</div><div class="line">        canvas.drawRoundRect(<span class="keyword">new</span> RectF(margin, margin, source.getWidth() - margin, source.getHeight() - margin), radius, radius, paint);</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (source != output) &#123;</div><div class="line">            source.recycle();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> output;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">key</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"rounded(radius="</span> + radius + <span class="string">", margin="</span> + margin + <span class="string">")"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="圆形图片"><a href="#圆形图片" class="headerlink" title="圆形图片"></a>圆形图片</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CircleTransform</span> <span class="keyword">implements</span> <span class="title">Transformation</span> </span>&#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> Bitmap <span class="title">transform</span><span class="params">(Bitmap source)</span> </span>&#123;</div><div class="line">      <span class="keyword">int</span> size = Math.min(source.getWidth(), source.getHeight());</div><div class="line"></div><div class="line">      <span class="keyword">int</span> x = (source.getWidth() - size) / <span class="number">2</span>;</div><div class="line">      <span class="keyword">int</span> y = (source.getHeight() - size) / <span class="number">2</span>;</div><div class="line"></div><div class="line">      Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);</div><div class="line">      <span class="keyword">if</span> (squaredBitmap != source) &#123;</div><div class="line">          source.recycle();</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      Bitmap bitmap = Bitmap.createBitmap(size, size, source.getConfig());</div><div class="line"></div><div class="line">      Canvas canvas = <span class="keyword">new</span> Canvas(bitmap);</div><div class="line">      Paint paint = <span class="keyword">new</span> Paint();</div><div class="line">      BitmapShader shader = <span class="keyword">new</span> BitmapShader(squaredBitmap, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);</div><div class="line">      paint.setShader(shader);</div><div class="line">      paint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line"></div><div class="line">      <span class="keyword">float</span> r = size / <span class="number">2f</span>;</div><div class="line">      canvas.drawCircle(r, r, r, paint);</div><div class="line"></div><div class="line">      squaredBitmap.recycle();</div><div class="line">      <span class="keyword">return</span> bitmap;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">key</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="string">"circle"</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -400,7 +387,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag">#Hexo</a>
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/Piccasso/" rel="tag">#Piccasso</a>
           
         </div>
       
@@ -409,13 +398,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/10/13/Gradle基础及常用命令/" rel="next" title="Gradle基础及常用命令">
+                <i class="fa fa-chevron-left"></i> Gradle基础及常用命令
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/12/三星手机拍照图片自动旋解决方法/" rel="prev" title="三星手机拍照图片自动旋解决方法">
-                三星手机拍照图片自动旋解决方法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -430,10 +419,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/11/Hexo搭建个人博客/"
-     data-title="使用Hexo搭建个人博客"
+        <div class="ds-share flat" data-thread-key="2016/10/18/Piccasso圆形图片及圆角图片处理/"
+     data-title="Piccasso图片圆角及圆形图片实现"
      data-content=""
-     data-url="http://yoursite.com/2016/10/11/Hexo搭建个人博客/">
+     data-url="http://yoursite.com/2016/10/18/Piccasso圆形图片及圆角图片处理/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -463,8 +452,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/11/Hexo搭建个人博客/"
-           data-title="使用Hexo搭建个人博客" data-url="http://yoursite.com/2016/10/11/Hexo搭建个人博客/">
+      <div class="ds-thread" data-thread-key="2016/10/18/Piccasso圆形图片及圆角图片处理/"
+           data-title="Piccasso图片圆角及圆形图片实现" data-url="http://yoursite.com/2016/10/18/Piccasso圆形图片及圆角图片处理/">
       </div>
     
   </div>
@@ -584,7 +573,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#选择Hexo搭建个人博客"><span class="nav-number">1.</span> <span class="nav-text">选择Hexo搭建个人博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo常用命令"><span class="nav-number">2.</span> <span class="nav-text">Hexo常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结尾"><span class="nav-number">3.</span> <span class="nav-text">结尾</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#图片圆角"><span class="nav-number">1.</span> <span class="nav-text">图片圆角</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#圆形图片"><span class="nav-number">2.</span> <span class="nav-text">圆形图片</span></a></li></ol></div>
             
           </div>
         </section>
