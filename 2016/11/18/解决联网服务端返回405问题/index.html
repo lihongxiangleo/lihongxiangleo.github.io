@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,Piccasso," />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -102,19 +102,30 @@
 
 
 
-<meta name="description" content="在开发中我们会经常遇到对图片进行圆角处理，以及现在流行的头像等将图片处理成圆形，Piccasso提供了transform这个机制，我们可以利用这个机制，在图片展示之前对图片进行处理，处理方式只需要实现Transformation 接口即可，下面我们来看一下实现代码。
-图片圆角12345678910111213141516171819202122232425262728293031public cl">
+<meta name="description" content="最近遇到了一个问题，在项目中有一个启动页广告图片下载的功能，之前能够正常下载，由于这个版本遇到了运营商DNS劫持的问题，服务端要调整图片的下载路径，也就是改变了图片的链接地址。修改地址之后下载就出现异常了，经过断点调试发现http请求的返回码为405，查了一下405的意思。
+
+405    Method Not Allowed（不允许使用的方法）    不支持该Request的方法。
+
+那么我们就">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Piccasso图片圆角及圆形图片实现">
-<meta property="og:url" content="http://yoursite.com/2016/10/18/Piccasso圆形图片及圆角图片处理/index.html">
+<meta property="og:title" content="解决联网下载服务端返回405问题">
+<meta property="og:url" content="http://yoursite.com/2016/11/18/解决联网服务端返回405问题/index.html">
 <meta property="og:site_name" content="Leo's Blog">
-<meta property="og:description" content="在开发中我们会经常遇到对图片进行圆角处理，以及现在流行的头像等将图片处理成圆形，Piccasso提供了transform这个机制，我们可以利用这个机制，在图片展示之前对图片进行处理，处理方式只需要实现Transformation 接口即可，下面我们来看一下实现代码。
-图片圆角12345678910111213141516171819202122232425262728293031public cl">
-<meta property="og:updated_time" content="2016-11-18T02:53:09.000Z">
+<meta property="og:description" content="最近遇到了一个问题，在项目中有一个启动页广告图片下载的功能，之前能够正常下载，由于这个版本遇到了运营商DNS劫持的问题，服务端要调整图片的下载路径，也就是改变了图片的链接地址。修改地址之后下载就出现异常了，经过断点调试发现http请求的返回码为405，查了一下405的意思。
+
+405    Method Not Allowed（不允许使用的方法）    不支持该Request的方法。
+
+那么我们就">
+<meta property="og:image" content="http://oexd4zy6v.bkt.clouddn.com/2B1B0798-1922-4B6B-9A78-9FC16303A7EF.png">
+<meta property="og:updated_time" content="2016-11-18T02:46:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Piccasso图片圆角及圆形图片实现">
-<meta name="twitter:description" content="在开发中我们会经常遇到对图片进行圆角处理，以及现在流行的头像等将图片处理成圆形，Piccasso提供了transform这个机制，我们可以利用这个机制，在图片展示之前对图片进行处理，处理方式只需要实现Transformation 接口即可，下面我们来看一下实现代码。
-图片圆角12345678910111213141516171819202122232425262728293031public cl">
+<meta name="twitter:title" content="解决联网下载服务端返回405问题">
+<meta name="twitter:description" content="最近遇到了一个问题，在项目中有一个启动页广告图片下载的功能，之前能够正常下载，由于这个版本遇到了运营商DNS劫持的问题，服务端要调整图片的下载路径，也就是改变了图片的链接地址。修改地址之后下载就出现异常了，经过断点调试发现http请求的返回码为405，查了一下405的意思。
+
+405    Method Not Allowed（不允许使用的方法）    不支持该Request的方法。
+
+那么我们就">
+<meta name="twitter:image" content="http://oexd4zy6v.bkt.clouddn.com/2B1B0798-1922-4B6B-9A78-9FC16303A7EF.png">
 
 
 
@@ -135,10 +146,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/10/18/Piccasso圆形图片及圆角图片处理/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/11/18/解决联网服务端返回405问题/"/>
 
 
-  <title> Piccasso图片圆角及圆形图片实现 | Leo's Blog </title>
+  <title> 解决联网下载服务端返回405问题 | Leo's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="en">
@@ -288,7 +299,7 @@
             
             
               
-                Piccasso图片圆角及圆形图片实现
+                解决联网下载服务端返回405问题
               
             
           </h1>
@@ -300,8 +311,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-18T20:24:52+08:00" content="2016-10-18">
-              2016-10-18
+            <time itemprop="dateCreated" datetime="2016-11-18T09:30:46+08:00" content="2016-11-18">
+              2016-11-18
             </time>
           </span>
 
@@ -330,8 +341,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/18/Piccasso圆形图片及圆角图片处理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/18/Piccasso圆形图片及圆角图片处理/" itemprop="commentsCount"></span>
+                <a href="/2016/11/18/解决联网服务端返回405问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/18/解决联网服务端返回405问题/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -354,9 +365,16 @@
       
 
       
-        <p>在开发中我们会经常遇到对图片进行圆角处理，以及现在流行的头像等将图片处理成圆形，Piccasso提供了transform这个机制，我们可以利用这个机制，在图片展示之前对图片进行处理，处理方式只需要实现<br>Transformation 接口即可，下面我们来看一下实现代码。</p>
-<h2 id="图片圆角"><a href="#图片圆角" class="headerlink" title="图片圆角"></a>图片圆角</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RoundedTransform</span> <span class="keyword">implements</span> <span class="title">Transformation</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> radius;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> margin;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RoundedTransform</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> radius, <span class="keyword">final</span> <span class="keyword">int</span> margin)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.radius = radius;</div><div class="line">        <span class="keyword">this</span>.margin = margin;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Bitmap <span class="title">transform</span><span class="params">(Bitmap source)</span> </span>&#123;</div><div class="line">        <span class="keyword">final</span> Paint paint = <span class="keyword">new</span> Paint();</div><div class="line">        paint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line">        paint.setShader(<span class="keyword">new</span> BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));</div><div class="line">        Bitmap output = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);</div><div class="line">        Canvas canvas = <span class="keyword">new</span> Canvas(output);</div><div class="line">        canvas.drawRoundRect(<span class="keyword">new</span> RectF(margin, margin, source.getWidth() - margin, source.getHeight() - margin), radius, radius, paint);</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (source != output) &#123;</div><div class="line">            source.recycle();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> output;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">key</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"rounded(radius="</span> + radius + <span class="string">", margin="</span> + margin + <span class="string">")"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="圆形图片"><a href="#圆形图片" class="headerlink" title="圆形图片"></a>圆形图片</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CircleTransform</span> <span class="keyword">implements</span> <span class="title">Transformation</span> </span>&#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> Bitmap <span class="title">transform</span><span class="params">(Bitmap source)</span> </span>&#123;</div><div class="line">      <span class="keyword">int</span> size = Math.min(source.getWidth(), source.getHeight());</div><div class="line"></div><div class="line">      <span class="keyword">int</span> x = (source.getWidth() - size) / <span class="number">2</span>;</div><div class="line">      <span class="keyword">int</span> y = (source.getHeight() - size) / <span class="number">2</span>;</div><div class="line"></div><div class="line">      Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);</div><div class="line">      <span class="keyword">if</span> (squaredBitmap != source) &#123;</div><div class="line">          source.recycle();</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      Bitmap bitmap = Bitmap.createBitmap(size, size, source.getConfig());</div><div class="line"></div><div class="line">      Canvas canvas = <span class="keyword">new</span> Canvas(bitmap);</div><div class="line">      Paint paint = <span class="keyword">new</span> Paint();</div><div class="line">      BitmapShader shader = <span class="keyword">new</span> BitmapShader(squaredBitmap, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);</div><div class="line">      paint.setShader(shader);</div><div class="line">      paint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line"></div><div class="line">      <span class="keyword">float</span> r = size / <span class="number">2f</span>;</div><div class="line">      canvas.drawCircle(r, r, r, paint);</div><div class="line"></div><div class="line">      squaredBitmap.recycle();</div><div class="line">      <span class="keyword">return</span> bitmap;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">key</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="string">"circle"</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <p>最近遇到了一个问题，在项目中有一个启动页广告图片下载的功能，之前能够正常下载，由于这个版本遇到了运营商DNS劫持的问题，服务端要调整图片的下载路径，也就是改变了图片的链接地址。修改地址之后下载就出现异常了，经过断点调试发现http请求的返回码为405，查了一下405的意思。</p>
+<blockquote>
+<p>405    Method Not Allowed（不允许使用的方法）    不支持该Request的方法。</p>
+</blockquote>
+<p>那么我们就知道突破点了，只需要设置正确的请求方法就可以解决问题。<br>原本的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">downloadImage</span><span class="params">(SplashBean splashBean)</span> </span>&#123;</div><div class="line">       <span class="keyword">for</span> (<span class="keyword">final</span> SplashImage splashImage : splashBean.data.list) &#123;</div><div class="line">           String name = URLUtil.guessFileName(splashImage.image, <span class="string">"Content-Disposition"</span>, <span class="keyword">null</span>);</div><div class="line">           <span class="keyword">if</span> (!TextUtils.isEmpty(splashImage.image)) &#123;</div><div class="line">               InputStream is = <span class="keyword">null</span>;</div><div class="line">               FileOutputStream fileOutputStream = <span class="keyword">null</span>;</div><div class="line">               <span class="keyword">try</span> &#123;</div><div class="line">                   URL url = <span class="keyword">new</span> URL(splashImage.image);</div><div class="line">                   HttpURLConnection conn = (HttpURLConnection) url.openConnection();</div><div class="line">                   conn.setReadTimeout(<span class="number">5000</span>);</div><div class="line">                   conn.setConnectTimeout(<span class="number">5000</span>);</div><div class="line">                   conn.setDoOutput(<span class="keyword">true</span>);</div><div class="line">                   <span class="keyword">if</span> (HttpURLConnection.HTTP_OK != conn.getResponseCode()) &#123;</div><div class="line">                       Log2345.d(TAG, <span class="string">"连接异常---responseCode = "</span> + conn.getResponseCode());</div><div class="line">                       <span class="keyword">return</span>;</div><div class="line">                   &#125;</div><div class="line">                   is = conn.getInputStream();</div><div class="line">                   File imageFile = <span class="keyword">new</span> File(StorageUtils.getCacheDirectory(AllianceApplication.appContext), name);</div><div class="line">                   fileOutputStream = <span class="keyword">new</span> FileOutputStream(imageFile);</div><div class="line">                   <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">16</span> * <span class="number">1024</span>];</div><div class="line">                   <span class="keyword">int</span> read;</div><div class="line">                   <span class="keyword">while</span> ((read = is.read(buffer)) != -<span class="number">1</span>) &#123;</div><div class="line">                       fileOutputStream.write(buffer, <span class="number">0</span>, read);</div><div class="line">                   &#125;</div><div class="line">                   is.close();</div><div class="line">                   fileOutputStream.close();</div><div class="line">                   <span class="comment">/**</span></div><div class="line">                    * 对比文件MD5值</div><div class="line">                    */</div><div class="line">                   String md5 = GetMD5.getMd5ByFile(imageFile);</div><div class="line">                   Log2345.d(TAG, <span class="string">"MD5对比:"</span> + md5 + <span class="string">"--"</span> + splashImage.md5);</div><div class="line">                   <span class="keyword">if</span> (md5.equals(splashImage.md5)) &#123;</div><div class="line">                       files.add(imageFile);</div><div class="line">                   &#125;</div><div class="line"></div><div class="line">                   <span class="keyword">if</span> (files.size() == splashBean.data.list.size()) &#123;</div><div class="line">                       Log2345.d(TAG, <span class="string">"file.size = "</span> + files.size());</div><div class="line">                       SharedPreferencesUtils.setSplashVersion(splashBean.data.version);</div><div class="line">                   &#125;</div><div class="line">                   SharedPreferencesUtils.setSplashInfo(JSON.toJSONString(splashBean));</div><div class="line">               &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                   e.printStackTrace();</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>通过抓包发现发送出去的请求为 POST 请求，这点就有点奇怪了，HttpURLConnection 默认的请求方法应该是 GET 求，在这里我并没有设置请求方法为什么抓包看到的是 POST 请求呢？于是在 <a href="http://stackoverflow.com/questions/35129894/android-httpurlconnection-set-get-request-method" target="_blank" rel="external">StackOverFlow</a> 上找到了原因。</p>
+<p><img src="http://oexd4zy6v.bkt.clouddn.com/2B1B0798-1922-4B6B-9A78-9FC16303A7EF.png" alt="StackOverFlow"></p>
+<p>看字面的意思是说如果调用了<figure class="highlight plain"><figcaption><span>GET 请求会改变为 POST 请求，因为 GET 请求是没有 request body 的。这就解释了之前为什么没有设置请求方法默认应该是 GET 请求，抓包缺看到的是 POST 请求了。那么只需要修改一下代码问题就解决了。</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">``` java</div><div class="line">        HttpURLConnection conn = (HttpURLConnection) url.openConnection();</div><div class="line">        conn.setRequestMethod(&quot;GET&quot;);//设置请求方法为 GET 请求</div><div class="line">        conn.setUseCaches(false);</div><div class="line">        conn.setReadTimeout(5000);</div><div class="line">        conn.setConnectTimeout(5000);</div></pre></td></tr></table></figure></p>
+<p>如上代码，删除掉<code>setDoOutput(true)</code>这个方法即可。这个时候问题已经解决了，请求返回码为 200 ，图片下载成功~</p>
 
       
     </div>
@@ -402,8 +420,6 @@
           
             <a href="/tags/Android/" rel="tag">#Android</a>
           
-            <a href="/tags/Piccasso/" rel="tag">#Piccasso</a>
-          
         </div>
       
 
@@ -411,17 +427,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/13/Gradle基础及常用命令/" rel="next" title="Gradle基础及常用命令">
-                <i class="fa fa-chevron-left"></i> Gradle基础及常用命令
+              <a href="/2016/10/18/Piccasso圆形图片及圆角图片处理/" rel="next" title="Piccasso图片圆角及圆形图片实现">
+                <i class="fa fa-chevron-left"></i> Piccasso图片圆角及圆形图片实现
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/18/解决联网服务端返回405问题/" rel="prev" title="解决联网下载服务端返回405问题">
-                解决联网下载服务端返回405问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -436,10 +448,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/18/Piccasso圆形图片及圆角图片处理/"
-     data-title="Piccasso图片圆角及圆形图片实现"
+        <div class="ds-share flat" data-thread-key="2016/11/18/解决联网服务端返回405问题/"
+     data-title="解决联网下载服务端返回405问题"
      data-content=""
-     data-url="http://yoursite.com/2016/10/18/Piccasso圆形图片及圆角图片处理/">
+     data-url="http://yoursite.com/2016/11/18/解决联网服务端返回405问题/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -469,8 +481,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/18/Piccasso圆形图片及圆角图片处理/"
-           data-title="Piccasso图片圆角及圆形图片实现" data-url="http://yoursite.com/2016/10/18/Piccasso圆形图片及圆角图片处理/">
+      <div class="ds-thread" data-thread-key="2016/11/18/解决联网服务端返回405问题/"
+           data-title="解决联网下载服务端返回405问题" data-url="http://yoursite.com/2016/11/18/解决联网服务端返回405问题/">
       </div>
     
   </div>
@@ -590,7 +602,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#图片圆角"><span class="nav-number">1.</span> <span class="nav-text">图片圆角</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#圆形图片"><span class="nav-number">2.</span> <span class="nav-text">圆形图片</span></a></li></ol></div>
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
             
           </div>
         </section>

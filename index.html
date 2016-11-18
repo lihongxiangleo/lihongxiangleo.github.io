@@ -287,6 +287,135 @@
             
               
                 
+                <a class="post-title-link" href="/2016/11/18/解决联网服务端返回405问题/" itemprop="url">
+                  解决联网下载服务端返回405问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-11-18T09:30:46+08:00" content="2016-11-18">
+              2016-11-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/18/解决联网服务端返回405问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/18/解决联网服务端返回405问题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近遇到了一个问题，在项目中有一个启动页广告图片下载的功能，之前能够正常下载，由于这个版本遇到了运营商DNS劫持的问题，服务端要调整图片的下载路径，也就是改变了图片的链接地址。修改地址之后下载就出现异常了，经过断点调试发现http请求的返回码为405，查了一下405的意思。</p>
+<blockquote>
+<p>405    Method Not Allowed（不允许使用的方法）    不支持该Request的方法。</p>
+</blockquote>
+<p>那么我们就知道突破点了，只需要设置正确的请求方法就可以解决问题。<br>原本的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">downloadImage</span><span class="params">(SplashBean splashBean)</span> </span>&#123;</div><div class="line">       <span class="keyword">for</span> (<span class="keyword">final</span> SplashImage splashImage : splashBean.data.list) &#123;</div><div class="line">           String name = URLUtil.guessFileName(splashImage.image, <span class="string">"Content-Disposition"</span>, <span class="keyword">null</span>);</div><div class="line">           <span class="keyword">if</span> (!TextUtils.isEmpty(splashImage.image)) &#123;</div><div class="line">               InputStream is = <span class="keyword">null</span>;</div><div class="line">               FileOutputStream fileOutputStream = <span class="keyword">null</span>;</div><div class="line">               <span class="keyword">try</span> &#123;</div><div class="line">                   URL url = <span class="keyword">new</span> URL(splashImage.image);</div><div class="line">                   HttpURLConnection conn = (HttpURLConnection) url.openConnection();</div><div class="line">                   conn.setReadTimeout(<span class="number">5000</span>);</div><div class="line">                   conn.setConnectTimeout(<span class="number">5000</span>);</div><div class="line">                   conn.setDoOutput(<span class="keyword">true</span>);</div><div class="line">                   <span class="keyword">if</span> (HttpURLConnection.HTTP_OK != conn.getResponseCode()) &#123;</div><div class="line">                       Log2345.d(TAG, <span class="string">"连接异常---responseCode = "</span> + conn.getResponseCode());</div><div class="line">                       <span class="keyword">return</span>;</div><div class="line">                   &#125;</div><div class="line">                   is = conn.getInputStream();</div><div class="line">                   File imageFile = <span class="keyword">new</span> File(StorageUtils.getCacheDirectory(AllianceApplication.appContext), name);</div><div class="line">                   fileOutputStream = <span class="keyword">new</span> FileOutputStream(imageFile);</div><div class="line">                   <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">16</span> * <span class="number">1024</span>];</div><div class="line">                   <span class="keyword">int</span> read;</div><div class="line">                   <span class="keyword">while</span> ((read = is.read(buffer)) != -<span class="number">1</span>) &#123;</div><div class="line">                       fileOutputStream.write(buffer, <span class="number">0</span>, read);</div><div class="line">                   &#125;</div><div class="line">                   is.close();</div><div class="line">                   fileOutputStream.close();</div><div class="line">                   <span class="comment">/**</span></div><div class="line">                    * 对比文件MD5值</div><div class="line">                    */</div><div class="line">                   String md5 = GetMD5.getMd5ByFile(imageFile);</div><div class="line">                   Log2345.d(TAG, <span class="string">"MD5对比:"</span> + md5 + <span class="string">"--"</span> + splashImage.md5);</div><div class="line">                   <span class="keyword">if</span> (md5.equals(splashImage.md5)) &#123;</div><div class="line">                       files.add(imageFile);</div><div class="line">                   &#125;</div><div class="line"></div><div class="line">                   <span class="keyword">if</span> (files.size() == splashBean.data.list.size()) &#123;</div><div class="line">                       Log2345.d(TAG, <span class="string">"file.size = "</span> + files.size());</div><div class="line">                       SharedPreferencesUtils.setSplashVersion(splashBean.data.version);</div><div class="line">                   &#125;</div><div class="line">                   SharedPreferencesUtils.setSplashInfo(JSON.toJSONString(splashBean));</div><div class="line">               &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                   e.printStackTrace();</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>通过抓包发现发送出去的请求为 POST 请求，这点就有点奇怪了，HttpURLConnection 默认的请求方法应该是 GET 求，在这里我并没有设置请求方法为什么抓包看到的是 POST 请求呢？于是在 <a href="http://stackoverflow.com/questions/35129894/android-httpurlconnection-set-get-request-method" target="_blank" rel="external">StackOverFlow</a> 上找到了原因。</p>
+<p><img src="http://oexd4zy6v.bkt.clouddn.com/2B1B0798-1922-4B6B-9A78-9FC16303A7EF.png" alt="StackOverFlow"></p>
+<p>看字面的意思是说如果调用了<figure class="highlight plain"><figcaption><span>GET 请求会改变为 POST 请求，因为 GET 请求是没有 request body 的。这就解释了之前为什么没有设置请求方法默认应该是 GET 请求，抓包缺看到的是 POST 请求了。那么只需要修改一下代码问题就解决了。</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">``` java</div><div class="line">        HttpURLConnection conn = (HttpURLConnection) url.openConnection();</div><div class="line">        conn.setRequestMethod(&quot;GET&quot;);//设置请求方法为 GET 请求</div><div class="line">        conn.setUseCaches(false);</div><div class="line">        conn.setReadTimeout(5000);</div><div class="line">        conn.setConnectTimeout(5000);</div></pre></td></tr></table></figure></p>
+<p>如上代码，删除掉<code>setDoOutput(true)</code>这个方法即可。这个时候问题已经解决了，请求返回码为 200 ，图片下载成功~</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/18/Piccasso圆形图片及圆角图片处理/" itemprop="url">
                   Piccasso图片圆角及圆形图片实现
                 </a>
@@ -356,12 +485,12 @@
 
       
         
-          <p>在开发中我们会经常遇到对图片进行圆角处理，以及现在流行的头像等将图片处理成圆形，Piccasso提供了transform这个机制，我们可以利用这个机制，在图片展示之前对图片进行处理，处理方式只需要实现<br>Transformation 接口即可，下面我们来看一下实现代码。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/18/Piccasso圆形图片及圆角图片处理/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+          
+            <p>在开发中我们会经常遇到对图片进行圆角处理，以及现在流行的头像等将图片处理成圆形，Piccasso提供了transform这个机制，我们可以利用这个机制，在图片展示之前对图片进行处理，处理方式只需要实现<br>Transformation 接口即可，下面我们来看一下实现代码。</p>
+<h2 id="图片圆角"><a href="#图片圆角" class="headerlink" title="图片圆角"></a>图片圆角</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RoundedTransform</span> <span class="keyword">implements</span> <span class="title">Transformation</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> radius;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> margin;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RoundedTransform</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> radius, <span class="keyword">final</span> <span class="keyword">int</span> margin)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.radius = radius;</div><div class="line">        <span class="keyword">this</span>.margin = margin;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Bitmap <span class="title">transform</span><span class="params">(Bitmap source)</span> </span>&#123;</div><div class="line">        <span class="keyword">final</span> Paint paint = <span class="keyword">new</span> Paint();</div><div class="line">        paint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line">        paint.setShader(<span class="keyword">new</span> BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));</div><div class="line">        Bitmap output = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);</div><div class="line">        Canvas canvas = <span class="keyword">new</span> Canvas(output);</div><div class="line">        canvas.drawRoundRect(<span class="keyword">new</span> RectF(margin, margin, source.getWidth() - margin, source.getHeight() - margin), radius, radius, paint);</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (source != output) &#123;</div><div class="line">            source.recycle();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> output;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">key</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"rounded(radius="</span> + radius + <span class="string">", margin="</span> + margin + <span class="string">")"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="圆形图片"><a href="#圆形图片" class="headerlink" title="圆形图片"></a>圆形图片</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CircleTransform</span> <span class="keyword">implements</span> <span class="title">Transformation</span> </span>&#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> Bitmap <span class="title">transform</span><span class="params">(Bitmap source)</span> </span>&#123;</div><div class="line">      <span class="keyword">int</span> size = Math.min(source.getWidth(), source.getHeight());</div><div class="line"></div><div class="line">      <span class="keyword">int</span> x = (source.getWidth() - size) / <span class="number">2</span>;</div><div class="line">      <span class="keyword">int</span> y = (source.getHeight() - size) / <span class="number">2</span>;</div><div class="line"></div><div class="line">      Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);</div><div class="line">      <span class="keyword">if</span> (squaredBitmap != source) &#123;</div><div class="line">          source.recycle();</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      Bitmap bitmap = Bitmap.createBitmap(size, size, source.getConfig());</div><div class="line"></div><div class="line">      Canvas canvas = <span class="keyword">new</span> Canvas(bitmap);</div><div class="line">      Paint paint = <span class="keyword">new</span> Paint();</div><div class="line">      BitmapShader shader = <span class="keyword">new</span> BitmapShader(squaredBitmap, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);</div><div class="line">      paint.setShader(shader);</div><div class="line">      paint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line"></div><div class="line">      <span class="keyword">float</span> r = size / <span class="number">2f</span>;</div><div class="line">      canvas.drawCircle(r, r, r, paint);</div><div class="line"></div><div class="line">      squaredBitmap.recycle();</div><div class="line">      <span class="keyword">return</span> bitmap;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">key</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="string">"circle"</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
         
       
     </div>
@@ -478,12 +607,24 @@
 
       
         
-          <h2 id="什么是Gradle"><a href="#什么是Gradle" class="headerlink" title="什么是Gradle"></a>什么是Gradle</h2><p>现在大部分的Android开发者所用的 IDE 应该都是 AndroidStudio 了，我们知道 AS 中的项目是基于 Gradle 构建的。Gradle 是一种基于 Groovy 语言的构建工具，Groovy 语法跟 Java 语法很相像，是一种动态语言，而且在 Java 基础上做了不少改进，用起来更加简洁、灵活。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/13/Gradle基础及常用命令/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+          
+            <h2 id="什么是Gradle"><a href="#什么是Gradle" class="headerlink" title="什么是Gradle"></a>什么是Gradle</h2><p>现在大部分的Android开发者所用的 IDE 应该都是 AndroidStudio 了，我们知道 AS 中的项目是基于 Gradle 构建的。Gradle 是一种基于 Groovy 语言的构建工具，Groovy 语法跟 Java 语法很相像，是一种动态语言，而且在 Java 基础上做了不少改进，用起来更加简洁、灵活。</p>
+<h2 id="Gradle-Wrapper"><a href="#Gradle-Wrapper" class="headerlink" title="Gradle Wrapper"></a>Gradle Wrapper</h2><p>现在默认新建一个项目，然后点击 AS 上运行，默认就会直接帮你安装 Gradle ，我们不需要额外的安装 Gradle 了，但是其实这个 Gradle 不是真正的 Gradle ，他叫 Gradle Wrapper ，意为 Gradle 的包装，什么意思呢？假设我们本地有多个项目，一个是比较老的项目，还用着 Gradle 1.0 的版本，一个是比较新的项目用了 Gradle 2.0 的版本，但是你两个项目肯定都想要同时运行的，如果你只装了 Gradle 1.0 的话那肯定不行，所以为了解决这个问题，Google 推出了 Gradle Wrapper 的概念，就是他在你每个项目都配置了一个指定版本的 Gradle ，你可以理解为每个 Android 项目本地都有一个小型的 Gradle ，通过这个每个项目你可以支持用不同的 Gradle 版本来构建项目。</p>
+<h2 id="Gradle常用命令"><a href="#Gradle常用命令" class="headerlink" title="Gradle常用命令"></a>Gradle常用命令</h2><ul>
+<li>查看构建版本 ./gradlew -v</li>
+<li>清除build文件夹 ./gradlew clean</li>
+<li>检查依赖并编译打包 ./gradlew build (会把debug和release包都打出来)</li>
+<li>编译并打Debug包 ./gradlew assembleDebug</li>
+<li>编译并打release包 ./gradlew assembleRelease</li>
+<li>Release模式打包并安装 ./gradlew installRelease</li>
+<li>卸载Release模式包 ./gradlew uninstallRelease</li>
+</ul>
+<p>assemble还可以结合productFlavor实现多渠道打包</p>
+<p>注：./ 代表当前目录，gradlew 意为 Gradle Wrapper</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="http://stormzhang.com/devtools/2014/12/18/android-studio-tutorial4/" target="_blank" rel="external">GRADLE基础</a></p>
+<p><a href="http://www.jianshu.com/p/a03f4f6ae31d" target="_blank" rel="external">Gradle 常用命令参数及解释</a></p>
+
+          
         
       
     </div>
@@ -600,16 +741,17 @@
 
       
         
-          <p>最近项目中遇到一个手机拍照的问题，就是三星、索尼等厂家的手机拍摄的照片呈现在ImageView上的时候图片会自动的旋转，由于项目中有发帖功能，这样用户在上传图片的时图片的角度就不正确了。在搜索了一些资料之后，找到了解决办法，思路很简单：</p>
+          
+            <p>最近项目中遇到一个手机拍照的问题，就是三星、索尼等厂家的手机拍摄的照片呈现在ImageView上的时候图片会自动的旋转，由于项目中有发帖功能，这样用户在上传图片的时图片的角度就不正确了。在搜索了一些资料之后，找到了解决办法，思路很简单：</p>
 <ol>
 <li>获取图片旋转的角度</li>
 <li>在显示图片时使图片旋转回正确的角度</li>
 </ol>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/12/三星手机拍照图片自动旋解决方法/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+<p>我们来看一下实现代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  * 读取图片的旋转的角度</div><div class="line">  * <span class="doctag">@param</span> path 图片绝对路径</div><div class="line">  * <span class="doctag">@return</span> 图片的旋转角度</div><div class="line">  */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getBitmapDegree</span><span class="params">(String path)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> degree = <span class="number">0</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">// 从指定路径下读取图片，并获取其EXIF信息</span></div><div class="line">            ExifInterface exifInterface = <span class="keyword">new</span> ExifInterface(path);</div><div class="line">            <span class="comment">// 获取图片的旋转信息</span></div><div class="line">            <span class="keyword">int</span> orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,</div><div class="line">                    ExifInterface.ORIENTATION_NORMAL);</div><div class="line">            <span class="keyword">switch</span> (orientation) &#123;</div><div class="line">                <span class="keyword">case</span> ExifInterface.ORIENTATION_ROTATE_90:</div><div class="line">                    degree = <span class="number">90</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> ExifInterface.ORIENTATION_ROTATE_180:</div><div class="line">                    degree = <span class="number">180</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> ExifInterface.ORIENTATION_ROTATE_270:</div><div class="line">                    degree = <span class="number">270</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> degree;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>代码很容易理解，注释写很清楚，在设置显示图片时根据获取的旋转角度将图片旋转回去即可，这样问题就解决了，enjoy 😁</p>
+
+          
         
       
     </div>
@@ -726,12 +868,25 @@
 
       
         
-          <h2 id="选择Hexo搭建个人博客"><a href="#选择Hexo搭建个人博客" class="headerlink" title="选择Hexo搭建个人博客"></a>选择Hexo搭建个人博客</h2><p>来沪工作后所接手的项目一直在叠加需求，工作比较忙碌再加之自己的惰性，很久都没写博客来总结一下开发中遇到的坑和知识，之前曾在csdn上写博客：<a href="http://blog.csdn.net/lihongxiangleo?viewmode=contents">博客地址</a>。但是由于csdn糟糕的体验和操蛋的服务器让我完全不能忍受，所以决定来搭建自己的个人博客了。如题我选择了Hexo这个博客框架，Hexo是一个快速、简洁且高效的博客框架，只需一条指令即可部署到 GitHubPages，Heroku 或其他网站，具体如何搭建和更换主题可以参照Hexo的官方文档，这里我选择的是简洁优雅的NexT主题。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/11/Hexo搭建个人博客/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+          
+            <h2 id="选择Hexo搭建个人博客"><a href="#选择Hexo搭建个人博客" class="headerlink" title="选择Hexo搭建个人博客"></a>选择Hexo搭建个人博客</h2><p>来沪工作后所接手的项目一直在叠加需求，工作比较忙碌再加之自己的惰性，很久都没写博客来总结一下开发中遇到的坑和知识，之前曾在csdn上写博客：<a href="http://blog.csdn.net/lihongxiangleo?viewmode=contents" target="_blank" rel="external">博客地址</a>。但是由于csdn糟糕的体验和操蛋的服务器让我完全不能忍受，所以决定来搭建自己的个人博客了。如题我选择了Hexo这个博客框架，Hexo是一个快速、简洁且高效的博客框架，只需一条指令即可部署到 GitHubPages，Heroku 或其他网站，具体如何搭建和更换主题可以参照Hexo的官方文档，这里我选择的是简洁优雅的NexT主题。</p>
+<ul>
+<li><a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo官方文档</a></li>
+<li><a href="http://theme-next.iissnan.com/" target="_blank" rel="external">Next主题配置使用文</a><br>在这里，要感谢Hexo和Next的作者！</li>
+</ul>
+<h2 id="Hexo常用命令"><a href="#Hexo常用命令" class="headerlink" title="Hexo常用命令"></a>Hexo常用命令</h2><p>Hexo的命令非常的简洁，具体的命令在官方文档上都有,大家可以自行去学习：<a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="external">Hexo命令</a></p>
+<p>常用的命令大概就下面几条：</p>
+<ul>
+<li>hexo new title生成一篇名为“title”的新文章，采用默认的模板</li>
+<li>hexo g 重新渲染Blog</li>
+<li>hexo s –debug启动本地服务器，可以用来本地测试</li>
+<li>hexo d 将本地public目录下的文件内容提交到Github，具体的项目地址在_config.yml设置</li>
+<li>hexo clean 清空本地的缓存文件db.json和已生成的静态文件public</li>
+</ul>
+<p>在本地测试的时候有可能会遇到端口被占用的问题，我目前的处理方式是关掉网页然后重启Terminal就解决了。一般的写作流程差不多是着这样的：<br>hexo new出一篇新的文章，写作完成后使用hexo g渲染，本地测试通过后使用hexo d部署到github page，完成文章的发布。</p>
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>倒腾了一天半，终于把博客的基本功能搭建好了，可以正常发表文章，目前还没有集成评论功能和统计功能，之后再慢慢给弄上去。希望自己能够克服自己的惰性坚持写博客（毕竟我花了这么长的时间来搭建！！！），多积累多学习，我们开始吧骚年！</p>
+
+          
         
       
     </div>
@@ -799,7 +954,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

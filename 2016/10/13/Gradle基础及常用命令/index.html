@@ -102,16 +102,19 @@
 
 
 
-<meta name="description" content="什么是Gradle现在大部分的Android开发者所用的 IDE 应该都是 AndroidStudio 了，我们知道 AS 中的项目是基于 Gradle 构建的。Gradle 是一种基于 Groovy 语言的构建工具，Groovy 语法跟 Java 语法很相像，是一种动态语言，而且在 Java 基础上做了不少改进，用起来更加简洁、灵活。">
+<meta name="description" content="什么是Gradle现在大部分的Android开发者所用的 IDE 应该都是 AndroidStudio 了，我们知道 AS 中的项目是基于 Gradle 构建的。Gradle 是一种基于 Groovy 语言的构建工具，Groovy 语法跟 Java 语法很相像，是一种动态语言，而且在 Java 基础上做了不少改进，用起来更加简洁、灵活。
+Gradle Wrapper现在默认新建一个项目，然后点击">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gradle基础及常用命令">
 <meta property="og:url" content="http://yoursite.com/2016/10/13/Gradle基础及常用命令/index.html">
 <meta property="og:site_name" content="Leo's Blog">
-<meta property="og:description" content="什么是Gradle现在大部分的Android开发者所用的 IDE 应该都是 AndroidStudio 了，我们知道 AS 中的项目是基于 Gradle 构建的。Gradle 是一种基于 Groovy 语言的构建工具，Groovy 语法跟 Java 语法很相像，是一种动态语言，而且在 Java 基础上做了不少改进，用起来更加简洁、灵活。">
-<meta property="og:updated_time" content="2016-10-13T06:17:20.000Z">
+<meta property="og:description" content="什么是Gradle现在大部分的Android开发者所用的 IDE 应该都是 AndroidStudio 了，我们知道 AS 中的项目是基于 Gradle 构建的。Gradle 是一种基于 Groovy 语言的构建工具，Groovy 语法跟 Java 语法很相像，是一种动态语言，而且在 Java 基础上做了不少改进，用起来更加简洁、灵活。
+Gradle Wrapper现在默认新建一个项目，然后点击">
+<meta property="og:updated_time" content="2016-11-18T02:53:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gradle基础及常用命令">
-<meta name="twitter:description" content="什么是Gradle现在大部分的Android开发者所用的 IDE 应该都是 AndroidStudio 了，我们知道 AS 中的项目是基于 Gradle 构建的。Gradle 是一种基于 Groovy 语言的构建工具，Groovy 语法跟 Java 语法很相像，是一种动态语言，而且在 Java 基础上做了不少改进，用起来更加简洁、灵活。">
+<meta name="twitter:description" content="什么是Gradle现在大部分的Android开发者所用的 IDE 应该都是 AndroidStudio 了，我们知道 AS 中的项目是基于 Gradle 构建的。Gradle 是一种基于 Groovy 语言的构建工具，Groovy 语法跟 Java 语法很相像，是一种动态语言，而且在 Java 基础上做了不少改进，用起来更加简洁、灵活。
+Gradle Wrapper现在默认新建一个项目，然后点击">
 
 
 
@@ -352,7 +355,6 @@
 
       
         <h2 id="什么是Gradle"><a href="#什么是Gradle" class="headerlink" title="什么是Gradle"></a>什么是Gradle</h2><p>现在大部分的Android开发者所用的 IDE 应该都是 AndroidStudio 了，我们知道 AS 中的项目是基于 Gradle 构建的。Gradle 是一种基于 Groovy 语言的构建工具，Groovy 语法跟 Java 语法很相像，是一种动态语言，而且在 Java 基础上做了不少改进，用起来更加简洁、灵活。</p>
-<a id="more"></a>
 <h2 id="Gradle-Wrapper"><a href="#Gradle-Wrapper" class="headerlink" title="Gradle Wrapper"></a>Gradle Wrapper</h2><p>现在默认新建一个项目，然后点击 AS 上运行，默认就会直接帮你安装 Gradle ，我们不需要额外的安装 Gradle 了，但是其实这个 Gradle 不是真正的 Gradle ，他叫 Gradle Wrapper ，意为 Gradle 的包装，什么意思呢？假设我们本地有多个项目，一个是比较老的项目，还用着 Gradle 1.0 的版本，一个是比较新的项目用了 Gradle 2.0 的版本，但是你两个项目肯定都想要同时运行的，如果你只装了 Gradle 1.0 的话那肯定不行，所以为了解决这个问题，Google 推出了 Gradle Wrapper 的概念，就是他在你每个项目都配置了一个指定版本的 Gradle ，你可以理解为每个 Android 项目本地都有一个小型的 Gradle ，通过这个每个项目你可以支持用不同的 Gradle 版本来构建项目。</p>
 <h2 id="Gradle常用命令"><a href="#Gradle常用命令" class="headerlink" title="Gradle常用命令"></a>Gradle常用命令</h2><ul>
 <li>查看构建版本 ./gradlew -v</li>
@@ -525,7 +527,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

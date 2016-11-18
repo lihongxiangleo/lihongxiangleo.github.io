@@ -105,7 +105,10 @@
 <meta name="description" content="最近项目中遇到一个手机拍照的问题，就是三星、索尼等厂家的手机拍摄的照片呈现在ImageView上的时候图片会自动的旋转，由于项目中有发帖功能，这样用户在上传图片的时图片的角度就不正确了。在搜索了一些资料之后，找到了解决办法，思路很简单：
 
 获取图片旋转的角度
-在显示图片时使图片旋转回正确的角度">
+在显示图片时使图片旋转回正确的角度
+
+我们来看一下实现代码
+1234567891011121314151617181920212223242">
 <meta property="og:type" content="article">
 <meta property="og:title" content="三星手机拍照图片自动旋解决方法">
 <meta property="og:url" content="http://yoursite.com/2016/10/12/三星手机拍照图片自动旋解决方法/index.html">
@@ -113,14 +116,20 @@
 <meta property="og:description" content="最近项目中遇到一个手机拍照的问题，就是三星、索尼等厂家的手机拍摄的照片呈现在ImageView上的时候图片会自动的旋转，由于项目中有发帖功能，这样用户在上传图片的时图片的角度就不正确了。在搜索了一些资料之后，找到了解决办法，思路很简单：
 
 获取图片旋转的角度
-在显示图片时使图片旋转回正确的角度">
-<meta property="og:updated_time" content="2016-10-13T06:16:42.000Z">
+在显示图片时使图片旋转回正确的角度
+
+我们来看一下实现代码
+1234567891011121314151617181920212223242">
+<meta property="og:updated_time" content="2016-11-18T02:52:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三星手机拍照图片自动旋解决方法">
 <meta name="twitter:description" content="最近项目中遇到一个手机拍照的问题，就是三星、索尼等厂家的手机拍摄的照片呈现在ImageView上的时候图片会自动的旋转，由于项目中有发帖功能，这样用户在上传图片的时图片的角度就不正确了。在搜索了一些资料之后，找到了解决办法，思路很简单：
 
 获取图片旋转的角度
-在显示图片时使图片旋转回正确的角度">
+在显示图片时使图片旋转回正确的角度
+
+我们来看一下实现代码
+1234567891011121314151617181920212223242">
 
 
 
@@ -365,8 +374,8 @@
 <li>获取图片旋转的角度</li>
 <li>在显示图片时使图片旋转回正确的角度</li>
 </ol>
-<a id="more"></a>
-<p>我们来看一下实现代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  * 读取图片的旋转的角度</div><div class="line">  * <span class="doctag">@param</span> path 图片绝对路径</div><div class="line">  * <span class="doctag">@return</span> 图片的旋转角度</div><div class="line">  */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getBitmapDegree</span><span class="params">(String path)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> degree = <span class="number">0</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">// 从指定路径下读取图片，并获取其EXIF信息</span></div><div class="line">            ExifInterface exifInterface = <span class="keyword">new</span> ExifInterface(path);</div><div class="line">            <span class="comment">// 获取图片的旋转信息</span></div><div class="line">            <span class="keyword">int</span> orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,</div><div class="line">                    ExifInterface.ORIENTATION_NORMAL);</div><div class="line">            <span class="keyword">switch</span> (orientation) &#123;</div><div class="line">                <span class="keyword">case</span> ExifInterface.ORIENTATION_ROTATE_90:</div><div class="line">                    degree = <span class="number">90</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> ExifInterface.ORIENTATION_ROTATE_180:</div><div class="line">                    degree = <span class="number">180</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> ExifInterface.ORIENTATION_ROTATE_270:</div><div class="line">                    degree = <span class="number">270</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> degree;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>我们来看一下实现代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  * 读取图片的旋转的角度</div><div class="line">  * <span class="doctag">@param</span> path 图片绝对路径</div><div class="line">  * <span class="doctag">@return</span> 图片的旋转角度</div><div class="line">  */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getBitmapDegree</span><span class="params">(String path)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> degree = <span class="number">0</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">// 从指定路径下读取图片，并获取其EXIF信息</span></div><div class="line">            ExifInterface exifInterface = <span class="keyword">new</span> ExifInterface(path);</div><div class="line">            <span class="comment">// 获取图片的旋转信息</span></div><div class="line">            <span class="keyword">int</span> orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,</div><div class="line">                    ExifInterface.ORIENTATION_NORMAL);</div><div class="line">            <span class="keyword">switch</span> (orientation) &#123;</div><div class="line">                <span class="keyword">case</span> ExifInterface.ORIENTATION_ROTATE_90:</div><div class="line">                    degree = <span class="number">90</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> ExifInterface.ORIENTATION_ROTATE_180:</div><div class="line">                    degree = <span class="number">180</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> ExifInterface.ORIENTATION_ROTATE_270:</div><div class="line">                    degree = <span class="number">270</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> degree;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <p>代码很容易理解，注释写很清楚，在设置显示图片时根据获取的旋转角度将图片旋转回去即可，这样问题就解决了，enjoy 😁</p>
 
       
@@ -524,7 +533,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
