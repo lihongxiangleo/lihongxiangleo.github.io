@@ -289,6 +289,152 @@
             
               
                 
+                <a class="post-title-link" href="/2017/03/27/DeepLink/" itemprop="url">
+                  DeepLink
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-03-27T14:14:58+08:00" content="2017-03-27">
+              2017-03-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/27/DeepLink/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/27/DeepLink/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/03/27/DeepLink/" class="leancloud_visitors" data-flag-title="DeepLink">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="DeepLink-是什么"><a href="#DeepLink-是什么" class="headerlink" title="DeepLink 是什么"></a>DeepLink 是什么</h2><p>DeepLink 从字面意思可以理解为「深度链接」，那么 DeepLink 在 Android 开发中有什么作用呢？简单来说，可以用这种技术实现 web 页面点击一个链接跳转至 APP 指定的某一页面。这种技术的好处是可以为我们的 APP 导流。举个例子，我们公司是做一个房产平台的，如果用户在浏览器上看到新房列表的信息，并且手机上已经安装了应用的话，便可以直接跳转到 APP 的房产列表页面，原生页面在体验和功能上当然是要比 H5 页面强多了。如果此时没有安装应用可以直接跳转至下一个 H5 页面或者提示用户跳转到应用市场下载应用。</p>
+<h2 id="如何使用-DeepLink"><a href="#如何使用-DeepLink" class="headerlink" title="如何使用 DeepLink"></a>如何使用 DeepLink</h2><p>我们的应用使用的是 Scheme 的方式来实现的，废话不多说，来看看正确的使用姿势。以我自己的项目为例。我们需要在清单文件 manifest 中添加 intent-filter。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">activity</span></div><div class="line">      <span class="attr">android:name</span>=<span class="string">".common.activity.WebStarterActivity"</span></div><div class="line">      <span class="attr">android:launchMode</span>=<span class="string">"singleTask"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.VIEW"</span> /&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span> /&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.BROWSABLE"</span> /&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">data</span></div><div class="line">                <span class="attr">android:host</span>=<span class="string">"app.xxx.com"</span></div><div class="line">                <span class="attr">android:scheme</span>=<span class="string">"openxxx"</span> /&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">data</span></div><div class="line">                <span class="attr">android:host</span>=<span class="string">"app.xxx.com"</span></div><div class="line">                <span class="attr">android:scheme</span>=<span class="string">"tel"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>在对应 Activity 中的代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (getIntent() != <span class="keyword">null</span> &amp;&amp; getIntent().getData() != <span class="keyword">null</span>) &#123;</div><div class="line">            String refer = getIntent().getData().getQueryParameter(<span class="string">"refer"</span>);</div><div class="line">            String path = getIntent().getData().getPath();</div><div class="line">            ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>中间省去了业务逻辑代码，看到这里大家可能不太明白 Activiy 中的代码是什么意思，这里要简单的说一下 URL Scheme 协议的格式。</p>
+<h2 id="URL-Scheme-协议格式"><a href="#URL-Scheme-协议格式" class="headerlink" title="URL Scheme 协议格式"></a>URL Scheme 协议格式</h2><p>以我自己项目中定的协议为例，一个完整的 URL Schema 协议格式：</p>
+<pre><code>openxxx://app.xxx.com/newhouselist?city_id=xxxx&amp;refer=xxxx
+</code></pre><p>上面包含了 scheme、host、path、query。</p>
+<ul>
+<li>openxxx 代表该 Scheme 协议名称（scheme）</li>
+<li>app.xxx.com 代表 Scheme 作用于哪个地址域（host）</li>
+<li>newhouselist 代表 Scheme 指定的页面（path）</li>
+<li>city_id 代表传递的参数（query）</li>
+</ul>
+<p>然后我们可以在 Activity 中获取 path 再跳转至对应的页面，并且可以通过 getQueryParameter() 方法来获取参数来传递给要跳转的页面。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/27/DeepLink/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/11/18/解决联网服务端返回405问题/" itemprop="url">
                   解决联网下载服务端返回405问题
                 </a>
@@ -817,153 +963,13 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/11/Hexo搭建个人博客/" itemprop="url">
-                  使用Hexo搭建个人博客
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-11T11:07:27+08:00" content="2016-10-11">
-              2016-10-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/11/Hexo搭建个人博客/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/11/Hexo搭建个人博客/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/10/11/Hexo搭建个人博客/" class="leancloud_visitors" data-flag-title="使用Hexo搭建个人博客">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="选择Hexo搭建个人博客"><a href="#选择Hexo搭建个人博客" class="headerlink" title="选择Hexo搭建个人博客"></a>选择Hexo搭建个人博客</h2><p>来沪工作后所接手的项目一直在叠加需求，工作比较忙碌再加之自己的惰性，很久都没写博客来总结一下开发中遇到的坑和知识，之前曾在csdn上写博客：<a href="http://blog.csdn.net/lihongxiangleo?viewmode=contents" target="_blank" rel="external">博客地址</a>。但是由于csdn糟糕的体验和操蛋的服务器让我完全不能忍受，所以决定来搭建自己的个人博客了。如题我选择了Hexo这个博客框架，Hexo是一个快速、简洁且高效的博客框架，只需一条指令即可部署到 GitHubPages，Heroku 或其他网站，具体如何搭建和更换主题可以参照Hexo的官方文档，这里我选择的是简洁优雅的NexT主题。</p>
-<ul>
-<li><a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo官方文档</a></li>
-<li><a href="http://theme-next.iissnan.com/" target="_blank" rel="external">Next主题配置使用文</a><br>在这里，要感谢Hexo和Next的作者！</li>
-</ul>
-<h2 id="Hexo常用命令"><a href="#Hexo常用命令" class="headerlink" title="Hexo常用命令"></a>Hexo常用命令</h2><p>Hexo的命令非常的简洁，具体的命令在官方文档上都有,大家可以自行去学习：<a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="external">Hexo命令</a></p>
-<p>常用的命令大概就下面几条：</p>
-<ul>
-<li>hexo new title生成一篇名为“title”的新文章，采用默认的模板</li>
-<li>hexo g 重新渲染Blog</li>
-<li>hexo s –debug启动本地服务器，可以用来本地测试</li>
-<li>hexo d 将本地public目录下的文件内容提交到Github，具体的项目地址在_config.yml设置</li>
-<li>hexo clean 清空本地的缓存文件db.json和已生成的静态文件public</li>
-</ul>
-<p>在本地测试的时候有可能会遇到端口被占用的问题，我目前的处理方式是关掉网页然后重启Terminal就解决了。一般的写作流程差不多是着这样的：<br>hexo new出一篇新的文章，写作完成后使用hexo g渲染，本地测试通过后使用hexo d部署到github page，完成文章的发布。</p>
-<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>倒腾了一天半，终于把博客的基本功能搭建好了，可以正常发表文章，目前还没有集成评论功能和统计功能，之后再慢慢给弄上去。希望自己能够克服自己的惰性坚持写博客（毕竟我花了这么长的时间来搭建！！！），多积累多学习，我们开始吧骚年！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1002,7 +1008,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1090,8 +1096,8 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
